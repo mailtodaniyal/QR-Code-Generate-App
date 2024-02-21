@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form {
+            display: grid;
+            margin-left: 520px;
+            border: none;
+            width: 300px;
+            border-radius: 20px;
+            background-color: rgba(0, 0, 255, 0.315);
+            padding: 8px;
+        }
+
+        form input {
+            margin: 10px;
+            padding: 8px;
+            background-color: rgba(255, 255, 255, 0.719);
+            border-radius: 10px;
+            border: none;
+        }
+
+        form button {
+            width: 100px;
+            margin-left: 90px;
+            margin-bottom: 10px;
+            background-color: rgb(238, 89, 89);
+            border-radius: 10px;
+            border: none;
+            color: white;
+            padding: 6px;
+        }
+
+        h1 {
+            text-align: center;
+            color: rgb(1, 1, 167);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>QR Code Generate</h1>
+    <form>
+        <input type="text" name="" id="name" placeholder="Name">
+        <input type="text" name="" id="fathername" placeholder="Father Name">
+        <input type="number" name="" id="age" placeholder="Age">
+        <button type="button" onclick="QRGenerate()">Generate</button>
+        <div id="result"></div>
+    </form>
+    <script>
+        function QRGenerate() {
+            var name = document.getElementById("name").value;
+            var fathername = document.getElementById("fathername").value;
+            var age = document.getElementById("age").value;
+            if (name == "" || fathername == "" || age == "") {
+                alert("Enter your details")
+            }
+            var QRscan = {
+                name: name,
+                fathername: fathername,
+                age: age,
+            }
+            var divresult = document.getElementById("result");
+            divresult.innerHTML = "";
+            var QRdata = new QRCode(divresult, {
+                text: JSON.stringify(QRscan),
+                width: 200,
+                height: 200,
+                colorDark: "Black",
+                colorWhite: "White",
+                correctlevel: QRCode.CorrectLevel.H
+            })
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+</body>
+
+</html>
